@@ -85,9 +85,10 @@ io.on('connection', (socket) => {
     
 
     socket.on("send_location", (coords) => {
-        console.log(`Location received from ${coords.email}: Latitude ${coords.lat}, Longitude ${coords.long}`);
+        console.log(JSON.stringify({ email: coords.email, lat: coords.lat, long: coords.long }));
         io.emit('receive-location', { id: socket.id, email: coords.email, lat: coords.lat, long: coords.long });
     });
+    
     
 
     socket.on('disconnect', () => {
