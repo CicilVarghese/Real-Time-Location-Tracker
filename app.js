@@ -6,6 +6,7 @@ const socketio = require('socket.io');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const axios = require('axios'); // Import axios
 const User = require('./models/User');
 const server = http.createServer(app);
 const io = socketio(server);
@@ -29,7 +30,6 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-// In the '/signup' route
 app.post('/signup', async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -42,7 +42,6 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-// In the '/login' route
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -72,7 +71,6 @@ app.get("/", isAuthenticated, async (req, res) => {
     const user = await User.findById(req.session.userId);
     console.log(user);
     res.render("index", { user });
-    
 });
 
 // Socket.io connection
@@ -82,14 +80,26 @@ io.on('connection', (socket) => {
     socket.on("register_device", (data) => {
         console.log(`Email registered: ${data.email}`);
     });
-    
 
-    socket.on("send_location", (coords) => {
+    socket.on("send_location", async (coords) => {
         console.log(JSON.stringify({ email: coords.email, lat: coords.lat, long: coords.long }));
+
+        // Send data to the Django server
+        try {
+            const djangoServerURL = 'http://192.168.1.1:8000/receive-gps/';
+            const response = await axios.post(djangoServerURL, {
+                email: coords.email,
+                latitude: coords.lat,
+                longitude: coords.long
+            });
+            console.log(`Data sent to Django server: ${response.status}`);
+        } catch (error) {
+            console.error("Error sending data to Django server:", error.message);
+        }
+
+        // Emit location to other connected clients
         io.emit('receive-location', { id: socket.id, email: coords.email, lat: coords.lat, long: coords.long });
     });
-    
-    
 
     socket.on('disconnect', () => {
         console.log(`User with ID ${socket.id} disconnected`);

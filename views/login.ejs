@@ -4,17 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(650px circle at 0% 0%, 
+                hsl(218, 41%, 35%) 15%, 
+                hsl(218, 41%, 30%) 35%, 
+                hsl(218, 41%, 20%) 75%, 
+                hsl(218, 41%, 19%) 80%, 
+                transparent 100%),
+                radial-gradient(1250px circle at 100% 100%, 
+                hsl(218, 41%, 45%) 15%, 
+                hsl(218, 41%, 30%) 35%, 
+                hsl(218, 41%, 20%) 75%, 
+                hsl(218, 41%, 19%) 80%, 
+                transparent 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .radius-shape {
+            position: absolute;
+            background: radial-gradient(#44006b, #ad1fff);
+            z-index: 1;
+        }
+
+        .radius-shape-1 {
+            height: 220px;
+            width: 220px;
+            top: -60px;
+            left: -130px;
+            border-radius: 50%;
+        }
+
+        .radius-shape-2 {
+            height: 300px;
+            width: 300px;
+            bottom: -60px;
+            right: -110px;
+            border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+        }
+
+        .card.bg-dark-glass {
+            background-color: hsla(0, 0%, 15%, 0.9) !important;
+            backdrop-filter: saturate(200%) blur(25px);
+            z-index: 10;
+            color: white;
+            border: none;
+        }
+
+        .form-control {
+            background-color: #2a2a2a;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .form-control:focus {
+            background-color: #333;
+            color: white;
+            border-color: hsl(218, 81%, 45%);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+
+        label {
+            color: #ccc;
+        }
+
+        .btn-primary {
+            background: hsl(218, 81%, 45%);
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background: hsl(218, 81%, 35%);
+        }
+
+        .btn-social {
+            border: 1px solid #ddd;
+            color: #ddd;
+            background-color: #444;
+            border-radius: 50%;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-social:hover {
+            background-color: hsl(218, 81%, 45%);
+            color: #fff;
+        }
+        .project-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    position: relative;
+    animation: slideIn 1.5s ease-out;
+}
+
+.subheading {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.description {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    color: #ddd;
+    line-height: 1.5;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Slide-in animation for the project name */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Hover effect for the project name */
+.project-name:hover {
+    color: #ff5722;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+    </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Login</h2>
-        <form action="/login" method="POST" class="form">
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" class="btn">Login</button>
-        </form>
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    <div class="radius-shape radius-shape-1"></div>
+    <div class="radius-shape radius-shape-2"></div>
+    <div class="container px-4 py-5 text-center text-lg-start">
+        <div class="row align-items-center">
+            <!-- Left Text Section -->
+            <div class="col-lg-6 text-white">
+                <h1 >Real-Time Location Tracker<br><h2><span>Sign in to continue</span></h2></h1>
+                <p>
+                    Access live location tracking and manage your real-time data efficiently. Login now to track locations and explore.
+                </p>
+            </div>
+
+            <!-- Right Login Section -->
+            <div class="col-lg-6">
+                <div class="card bg-dark-glass shadow-lg rounded">
+                    <div class="card-body p-5">
+                        <form action="/login" method="POST">
+                            <!-- Email -->
+                            <div class="form-outline mb-4">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                                
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-outline mb-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
+                                
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary w-100 btn-lg mb-4">
+                                Login
+                            </button>
+
+                            <!-- Social Logins -->
+                            <div class="text-center">
+                                <p>or login with:</p>
+                                <button type="button" class="btn btn-social mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button type="button" class="btn btn-social mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+                                <button type="button" class="btn btn-social mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button type="button" class="btn btn-social mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                            <div class="text-center mt-3">
+                                <p>Don't have an account? <a href="/signup" class="text-primary">Sign up</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
