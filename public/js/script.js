@@ -3,16 +3,17 @@ const deviceId = navigator.userAgent; // Use user agent as a unique identifier f
 
 // Emit the device ID upon connection
 socket.on("connect", () => {
-    console.log(`Connected with device ID: ${deviceId}`);
-    socket.emit("register_device", { deviceId });
+    console.log(`Connected with email: ${userEmail}`);
+    socket.emit("register_device", { email: userEmail });
 });
+
 
 if (navigator.geolocation) {
     navigator.geolocation.watchPosition(
         (position) => {
             const { latitude: lat, longitude: long } = position.coords;
-            console.log(`Sending location from ${deviceId}: Latitude ${lat}, Longitude ${long}`);
-            socket.emit("send_location", { deviceId, lat, long });
+            console.log(`Sending location from ${userEmail}: Latitude ${lat}, Longitude ${long}`);
+            socket.emit("send_location", { email: userEmail, lat, long });
         },
         (error) => {
             console.log("Geolocation error:", error);
@@ -23,6 +24,7 @@ if (navigator.geolocation) {
             timeout: 5000
         }
     );
+    
 } else {
     console.log("Geolocation is not supported by this browser.");
 }
@@ -35,15 +37,16 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const markers = {};
 
 socket.on("receive-location", (data) => {
-    const { id, deviceId, lat, long } = data;
-    console.log(`Received location from ${deviceId}: Latitude ${lat}, Longitude ${long}`);
+    const { id, email, lat, long } = data;
+    console.log(`Received location from ${email}: Latitude ${lat}, Longitude ${long}`);
     if (markers[id]) {
         markers[id].setLatLng([lat, long]);
     } else {
-        markers[id] = L.marker([lat, long]).addTo(map).bindPopup(deviceId).openPopup();
+        markers[id] = L.marker([lat, long]).addTo(map).bindPopup(email).openPopup();
     }
     map.setView([lat, long], 16);
 });
+
 
 socket.on("disconnect", () => {
     console.log("Disconnected from server");

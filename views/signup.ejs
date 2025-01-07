@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Signup</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -98,55 +98,6 @@
             background-color: hsl(218, 81%, 45%);
             color: #fff;
         }
-        .project-name {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 3rem;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-    position: relative;
-    animation: slideIn 1.5s ease-out;
-}
-
-.subheading {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1.5rem;
-    color: #f0f0f0;
-    margin-bottom: 30px;
-    opacity: 0.8;
-}
-
-.description {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.1rem;
-    color: #ddd;
-    line-height: 1.5;
-    max-width: 450px;
-    margin: 0 auto;
-}
-
-/* Slide-in animation for the project name */
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-/* Hover effect for the project name */
-.project-name:hover {
-    color: #ff5722;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
     </style>
 </head>
 <body>
@@ -156,17 +107,24 @@
         <div class="row align-items-center">
             <!-- Left Text Section -->
             <div class="col-lg-6 text-white">
-                <h1 >Real-Time Location Tracker<br><h2><span>Sign in to continue</span></h2></h1>
+                <h1>Join Us<br><span>Create your account</span></h1>
                 <p>
-                    Access live location tracking and manage your real-time data efficiently. Login now to track locations and explore.
+                    Sign up to begin using the Real-Time Location Tracker and enjoy seamless tracking and updates.
                 </p>
             </div>
 
-            <!-- Right Login Section -->
+            <!-- Right Signup Section -->
             <div class="col-lg-6">
                 <div class="card bg-dark-glass shadow-lg rounded">
                     <div class="card-body p-5">
-                        <form action="/login" method="POST">
+                        <form action="/signup" method="POST">
+                            <!-- Name -->
+                            <div class="form-outline mb-4">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                                
+                            </div>
+
                             <!-- Email -->
                             <div class="form-outline mb-4">
                                 <label for="email" class="form-label">Email</label>
@@ -181,14 +139,21 @@
                                 
                             </div>
 
+                            <!-- Confirm Password -->
+                            <div class="form-outline mb-4">
+                                <label for="confirm-password" class="form-label">Confirm Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
+                                
+                            </div>
+
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary w-100 btn-lg mb-4">
-                                Login
+                                Sign Up
                             </button>
 
-                            <!-- Social Logins -->
+                            <!-- Social Signups -->
                             <div class="text-center">
-                                <p>or login with:</p>
+                                <p>or signup with:</p>
                                 <button type="button" class="btn btn-social mx-1">
                                     <i class="fab fa-facebook-f"></i>
                                 </button>
@@ -201,9 +166,6 @@
                                 <button type="button" class="btn btn-social mx-1">
                                     <i class="fab fa-github"></i>
                                 </button>
-                            </div>
-                            <div class="text-center mt-3">
-                                <p>Don't have an account? <a href="/signup" class="text-primary">Sign up</a></p>
                             </div>
                         </form>
                     </div>
